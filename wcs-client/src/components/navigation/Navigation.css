@@ -1,0 +1,27 @@
+.wcs-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--text-size);
+    background-color: var(--bg-light-color);
+}
+
+.wcs-header-navlink {
+    padding: 20px;
+    color: var(--text-active-color);
+}
+
+.wcs-header-navlink.active {
+    color: var(--text-inactive-color);
+}
+
+.wcs-footer {
+    display: flex;
+    justify-content: space-around;
+    font-size: var(--text-size);
+    background-color: var(--bg-light-color);
+}
+
+.wcs-footer-list {
+    list-style: none;
+    padding: unset;
+}
