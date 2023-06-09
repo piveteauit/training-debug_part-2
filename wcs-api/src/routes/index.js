@@ -1,7 +1,5 @@
-const movieRouter = require("./movieRoutes");
-const userRouter = require("./userRoutes");
-
-module.exports = {
-    userRouter,
-    movieRouter,
+module.exports = function(router) {
+    router.use("/products", require("./productRoutes"));
+    router.use("/users", require("./userRoutes"));
+    router.use("/carts", require("./cartRoutes"));
 }

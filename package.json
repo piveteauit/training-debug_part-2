@@ -4,9 +4,21 @@
   "description": "Salut le template du p3",
   "main": "index.js",
   "scripts": {
+    "setup": "npm i && npm --prefix wcs-api i && npm --prefix wcs-client i && npm run migrate --prefix wcs-api",
+    "migrate": "npm run migrate --prefix wcs-api",
+    "dev": "cross-env-shell 'concurrently -c green,yellow -t \"HH:mm:ss\" -p \"{name} {time}\" \"$npm_package_config_cli:dev-*\"'",
+    "dev-client": "cross-env-shell \"cd ./wcs-client && $npm_package_config_cli run dev\"",
+    "dev-api": "cross-env-shell \"cd ./wcs-api && $npm_package_config_cli run dev\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.1.0",
+    "cross-env": "^7.0.3"
+  },
+  "config": {
+    "cli": "npm"
+  }
 }

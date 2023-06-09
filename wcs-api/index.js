@@ -1,5 +1,4 @@
 const express = require('express');
-const {userRouter, movieRouter} = require('./src/routes');
 
 const app = express();
 
@@ -13,8 +12,7 @@ APIRouter.get('/version', function(req, res) {
     return res.json({ version })
 })
 
-APIRouter.use('/users', userRouter);
-APIRouter.use('/movies', movieRouter)
+require('./src/routes')(APIRouter);
 
 app.use('/api', APIRouter);
 

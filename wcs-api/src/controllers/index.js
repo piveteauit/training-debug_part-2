@@ -1,7 +1,9 @@
-const MovieController = require("./MovieController")
+const ProductController = require("./ProductController")
 const UserController = require("./UserController")
+const CartController = require("./CartController")
 
 module.exports = {
     UserController,
-    MovieController,
+    ProductController,
+    CartController,
 }

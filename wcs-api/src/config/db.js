@@ -4,7 +4,13 @@ const mysql = require('mysql2/promise');
 
 const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
 
-// console.log(DB_HOST, DB_USER)
+
+/**
+ * 
+ * @date 09/06/2023 - 11:02:35
+ *
+ * @type {*}
+ */
 const db = mysql.createPool({
   host: DB_HOST,
   user: DB_USER,
