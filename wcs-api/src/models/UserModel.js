@@ -30,7 +30,7 @@ class UserModel extends BaseModel {
      */
     constructor() {
         super('users u');
-
+        
         this.fieldsMapping = {
             "id": [`u.id`],
             "email": [`u.email`],
@@ -77,7 +77,7 @@ class UserModel extends BaseModel {
      */
     create(payload) {
         return this.db.query(
-            `INSERT INTO ${this.rawTable} (email, username, password, role_id) VALUES (?, ?, MD5(?), 1)`,
+            `INSERT INTO ${this.rawTable} (email, username, password, role_id) VALUES (?, ?, MD5(?), 2)`,
             Object.values(payload)
         )
     }

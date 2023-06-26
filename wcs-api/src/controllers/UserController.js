@@ -46,6 +46,8 @@ class UserController extends BaseController {
      * @returns {*}
      */
     authUser() {
+        this.model.fields = ["id", "email", "username", "role"];
+
         return this.model.authUser(this.req.body)
             .then(([results]) => results[0])
             .then((user) => {

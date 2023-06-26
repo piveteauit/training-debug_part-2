@@ -13,7 +13,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 CREATE TABLE users (
     id int primary key NOT NULL AUTO_INCREMENT,
     username varchar(255) NOT NULL,
-    email varchar(255) UNIQUE NOT NULL,
+    email varchar(18) UNIQUE NOT NULL,
     password varchar(255) DEFAULT NULL,
     role_id INT NOT NULL,
     FOREIGN KEY (role_id)
