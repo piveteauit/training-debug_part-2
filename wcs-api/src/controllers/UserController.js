@@ -25,6 +25,11 @@ class UserController extends BaseController {
         super(req, res, UserModel);
     }
 
+    getUserCart() {
+        this.model.getUserCart(this.req.params.user_id)
+            .then(([results]) => this.sendJson(results))
+    }
+
     
 }
 

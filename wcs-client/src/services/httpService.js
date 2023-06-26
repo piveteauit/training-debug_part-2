@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:8080";
+const baseUrl = "/api";
 
 
 /**
@@ -30,7 +30,8 @@ const httpService = {
 
   create: function (resource, body) {
     return fetch({
-      url: `${baseUrl}/${resource}/${id}`,
+      method: "post",
+      url: `${baseUrl}/${resource}`,
       body,
     })
     .then(getParsedResponse);

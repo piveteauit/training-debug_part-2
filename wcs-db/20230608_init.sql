@@ -30,8 +30,7 @@ CREATE TABLE products (
     category varchar(255) NOT NULL,
     description TEXT NOT NULL,
     image varchar(255) NOT NULL,
-    price DECIMAL(7, 2) NOT NULL,
-    password varchar(255) DEFAULT NULL
+    price DECIMAL(7, 2) NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 SET FOREIGN_KEY_CHECKS = 0;

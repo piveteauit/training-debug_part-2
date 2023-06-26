@@ -1,0 +1,8 @@
+.wcs-products-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 30px;
+    padding: 40px 0 40px 40px;
+}

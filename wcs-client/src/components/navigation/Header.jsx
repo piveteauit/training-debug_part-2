@@ -8,7 +8,7 @@ export function Header() {
         <header className="wcs-header">
             <div className="wcs-header-left">
                 <NavLink className={"wcs-header-navlink"} to={"/"}> Home </NavLink>            
-                <NavLink className={"wcs-header-navlink"} to={"/products"}> Shop </NavLink>
+                <NavLink className={"wcs-header-navlink"} to={"/shop"}> Shop </NavLink>
             </div>
 
             

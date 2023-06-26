@@ -1,0 +1,74 @@
+.wcs-input-wrapper {
+    position: relative;
+    display: flex; 
+    flex-direction: column;
+    margin: 20px;
+}
+
+.wcs-label {
+    position: absolute;
+    left: 2px;
+    top: 3px;
+    transition: all .2s;
+    padding: 2px;
+    font-size: 14px;
+    color: #888;
+}
+
+.wcs-label.active {
+    top: -12px;
+    font-size: 12px;
+    background-color: #FFF;
+    color: #4477FF;
+    transition: all .2s;
+}
+
+input {
+    outline: none;
+    max-width: 150px;
+    padding: 5px;
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    background: none;
+    color: #4477FF;
+}
+
+.wcs-input.active {
+    border: 1px solid #4477FF;
+}
+
+.wcs-add-product-wrapper {
+    display: flex;
+    justify-content: space-around;
+    padding: 5px 10px;
+    flex-direction: row;
+    max-width: 100px;
+    margin: auto;
+}
+
+.wcs-add-product-wrapper {
+    padding: 5px 0;
+    width: 80px;
+}
+
+.wcs-add-to-cart-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 5px 10px;
+    margin: 10px auto;
+    position: relative;
+}
+
+.wcs-add-to-cart-counter {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 14px;
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid #DDD;
+    text-align: center;
+    background: #FFF;
+    right: -10px;
+    bottom: -20px;
+}

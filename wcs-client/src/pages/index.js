@@ -1,5 +1,5 @@
 export * from "./home"
 export * from "./carts"
-export * from "./products"
+export * from "./shop"
 export * from "./users"
 export * from "./not-found";
