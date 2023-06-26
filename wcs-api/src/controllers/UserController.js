@@ -1,5 +1,7 @@
+const jwt = require('jsonwebtoken');
 const { UserModel } = require("../models");
 const BaseController = require("./BaseController");
+const { jwtSecret } = require('../config');
 
 
 /**
@@ -28,6 +30,15 @@ class UserController extends BaseController {
     getUserCart() {
         this.model.getUserCart(this.req.params.user_id)
             .then(([results]) => this.sendJson(results))
+    }
+
+    authUser() {
+        this.model.authUser(this.req.body)
+            .then(([results]) => results[0])
+            .then((user) => {
+                this.res.cookie("access_token", jwt.sign(user, jwtSecret, {expiresIn: "1d"}))
+                this.sendJson(user)
+            })
     }
 
     

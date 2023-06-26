@@ -47,6 +47,12 @@ class UserModel extends BaseModel {
         `SELECT product_id, quantity FROM carts WHERE user_id = ?`,
         [user_id]);
     }
+
+    authUser({email, password}) {
+        return this.db.query(
+            `SELECT ${this._getFields()} FROM ${this.table} ${this._getJoins()} WHERE email = ? AND password = MD5(?)`,
+            [email, password]);
+    }
 }
 
 module.exports = UserModel;

@@ -1,6 +1,5 @@
 const {db} = require("../config");
 
-
 /**
  * 
  * @date 09/06/2023 - 10:56:29
@@ -9,8 +8,6 @@ const {db} = require("../config");
  * @typedef {BaseModel}
  */
 class BaseModel {
-
-    
     /**
      * 
      * @date 09/06/2023 - 10:56:38
@@ -119,7 +116,6 @@ class BaseModel {
             ?.map((field) => this.fieldsMapping[field]?.[1].query)
             || "";
     }
-
 }
 
 module.exports = BaseModel;

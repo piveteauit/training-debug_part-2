@@ -9,8 +9,10 @@ export function Cart() {
     const [products] = useProduct();
     const [inCartProducts, setInCartProducts] = useState([]);
 
+    console.log(user)
+
     useEffect(() => {
-        httpService.getAll(`users/${user?.id || 1}/carts`)
+        httpService.getAll(`users/${user?.id}/carts`)
             .then(setCart)
             .catch(console.error)
     }, [])

@@ -21,20 +21,31 @@ function getParsedResponse(r) {
 const httpService = {
   
   getAll: function (resource) {
-    return fetch(`${baseUrl}/${resource}`).then(getParsedResponse);
+    return this._get(`${baseUrl}/${resource}`);
   },
 
   getById: function (resource, id) {
-    return fetch(`${baseUrl}/${resource}/${id}`).then(getParsedResponse);
+    return this._get(`${baseUrl}/${resource}/${id}`);
   },
 
   create: function (resource, body) {
-    return fetch({
-      method: "post",
-      url: `${baseUrl}/${resource}`,
-      body,
-    })
-    .then(getParsedResponse);
+    return this._post(`${baseUrl}/${resource}`, body);
+  },
+
+
+
+  _get(url) {
+    return fetch(url, {credentials: 'same-origin'}).then(getParsedResponse);
+  },
+
+  _post(url, body) {
+    return fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify(body || {}),
+    }).then(getParsedResponse);
   },
 };
 
