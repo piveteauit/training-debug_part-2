@@ -8,6 +8,18 @@ const {db} = require("../config");
  * @typedef {BaseModel}
  */
 class BaseModel {
+    
+    /**
+     * 
+     * @date 26/06/2023 - 21:36:30
+     *
+     * @readonly
+     * @type {*}
+     */
+    get rawTable() {
+        return this.table.split(' ')?.[0];
+    }
+    
     /**
      * 
      * @date 09/06/2023 - 10:56:38

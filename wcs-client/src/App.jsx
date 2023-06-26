@@ -17,12 +17,14 @@ function App() {
                 
                 <Route path="" Component={WCSPages.Home} />
                 
-                <Route path="/users" Component={WCSPages.UserList} />
-                <Route path="/users/:user_id" Component={WCSPages.UserDetail} />
-                
                 <Route path="/shop" Component={WCSPages.Shop} />
                 <Route path="/products/:product_id" Component={WCSPages.ProductDetail} />
-                
+                                
+                <Route path="/profil" Component={WCSPages.Profil} />
+
+                <Route path="/users" Component={WCSPages.UserList} />
+                <Route path="/users/:user_id" Component={WCSPages.UserDetail} />
+
                 <Route path="*" Component={WCSPages.NotFound} />
 
               </Routes>

@@ -1,5 +1,13 @@
 import { useCart } from "../contexts"
 
+/**
+ * 
+ * @date 26/06/2023 - 20:28:24
+ *
+ * @export
+ * @param {{ product_id: any; }} {product_id}
+ * @returns {*}
+ */
 export function AddToCart({product_id}) {
     const {cart, addToCart} = useCart();
     const currentProduct = cart?.find(c => c.product_id === product_id);

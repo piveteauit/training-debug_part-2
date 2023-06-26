@@ -3,23 +3,29 @@ import { httpService } from "../../services";
 import { useCart, useProduct, useUser } from "../../contexts";
 import { ProductLightItem } from "../products";
 
+/**
+ * 
+ * @date 26/06/2023 - 20:25:54
+ *
+ * @export
+ * @returns {*}
+ */
 export function Cart() {
     const {setCart, getInCartProducts, cart} = useCart();
     const {user} = useUser();
     const [products] = useProduct();
     const [inCartProducts, setInCartProducts] = useState([]);
 
-    console.log(user)
+    useEffect(() => {
+        if (products?.length) setInCartProducts(getInCartProducts(products));
+    }, [cart]);
 
     useEffect(() => {
         httpService.getAll(`users/${user?.id}/carts`)
             .then(setCart)
             .catch(console.error)
-    }, [])
+    }, [products])
 
-    useEffect(() => {
-        setInCartProducts(getInCartProducts(products));
-    }, [cart])
 
     const totalPrice = inCartProducts.reduce((totalPrice, {price, quantity}) => (totalPrice + (Number(price) * Number(quantity))), 0).toFixed(2);
 
