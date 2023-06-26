@@ -51,7 +51,7 @@ class UserModel extends BaseModel {
      */
     getUserCart(user_id) {
         return this.db.query(
-        `SELECT product_id, quantity FROM carts WHERE user_id = ?`,
+        `SELECT id as cart_id, product_id, quantity FROM carts WHERE user_id = ?`,
         [user_id]);
     }
 

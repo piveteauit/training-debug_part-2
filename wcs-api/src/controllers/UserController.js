@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { UserModel } = require("../models");
+const { UserModel, CartModel } = require("../models");
 const BaseController = require("./BaseController");
 const { jwtSecret } = require('../config');
 
@@ -77,7 +77,30 @@ class UserController extends BaseController {
             })
             .then(this.sendJson.bind(this))
             .catch(this.handleError.bind(this));
-    }   
+    }
+
+    addCart() {
+        return new CartModel()
+            .create({...this.req.body, user_id: this.req.params.user_id})
+            .then(([result]) => ({
+                product_id: this.req.body?.product_id,
+                quantity: this.req.body?.quantity,
+                cart_id: result?.insertedId,
+            }))
+            .then(this.sendJson.bind(this))
+            .catch(this.handleError.bind(this));
+    }
+
+    updateCart() {
+        return new CartModel()
+            .update(this.req.body, this.req.params.cart_id)
+            .then(([result]) => ({
+                ...this.req.body,
+                cart_id: this.req.params.cart_id,
+            }))
+            .then(this.sendJson.bind(this))
+            .catch(this.handleError.bind(this));
+    }
 }
 
 module.exports = UserController;

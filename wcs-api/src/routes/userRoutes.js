@@ -11,5 +11,9 @@ userRouter.get('/:user_id/carts', userAuthMiddleware, (req, res) => new UserCont
 userRouter.post('/auth', (req, res) => new UserController(req, res).authUser());
 userRouter.post('/register', (req, res) => new UserController(req, res).register());
 
+userRouter.post('/:user_id/carts', (req, res) => new UserController(req, res).addCart());
+userRouter.put('/:user_id/carts/:cart_id', (req, res) => new UserController(req, res).updateCart());
+
+
 
 module.exports = userRouter;

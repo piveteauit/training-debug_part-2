@@ -44,7 +44,6 @@ class BaseModel {
      */
     db;
 
-    
     /**
      * 
      * @date 09/06/2023 - 10:56:50
@@ -60,7 +59,6 @@ class BaseModel {
      * @type {{}}
      */
     joins = [];
-
     
     /**
      * Creates an instance of BaseModel.
@@ -74,8 +72,6 @@ class BaseModel {
         this.alias = table.split(' ')?.[1] || table;
         this.db = db;
     }
-
-
     
     /**
      * 
@@ -88,7 +84,6 @@ class BaseModel {
             .query(`SELECT ${this._getFields()} FROM ${this.table} ${this._getJoins()}`)
     }
 
-    
     /**
      * 
      * @date 09/06/2023 - 10:57:30
@@ -101,7 +96,6 @@ class BaseModel {
             .query(`SELECT ${this._getFields()} FROM ${this.table} ${this._getJoins()} WHERE ${this.alias}.id = ?`, [id])
     }
 
-    
     /**
      * 
      * @date 09/06/2023 - 10:58:03
@@ -115,7 +109,6 @@ class BaseModel {
             || "*"
     }
 
-    
     /**
      * 
      * @date 09/06/2023 - 10:58:27

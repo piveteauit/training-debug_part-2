@@ -26,7 +26,6 @@ export function Cart() {
             .catch(console.error)
     }, [products])
 
-
     const totalPrice = inCartProducts.reduce((totalPrice, {price, quantity}) => (totalPrice + (Number(price) * Number(quantity))), 0).toFixed(2);
 
     return (

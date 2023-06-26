@@ -1,4 +1,4 @@
-import { useCart } from "../contexts"
+import { useCart, useUser } from "../contexts"
 
 /**
  * 
@@ -9,19 +9,33 @@ import { useCart } from "../contexts"
  * @returns {*}
  */
 export function AddToCart({product_id}) {
-    const {cart, addToCart} = useCart();
-    const currentProduct = cart?.find(c => c.product_id === product_id);
+    const {cart, addToCart, saveCart} = useCart();
+    const currentCart = cart?.find(c => c.product_id === product_id);
+    const {user} = useUser();
+
+    const addProductToCart = () => {
+        addToCart(product_id);
+        const {quantity} = currentCart || { quantity: 1 };
+        saveCart({product_id, quantity: quantity + 1}, user?.id, currentCart?.cart_id)
+    }
 
     return (
         <div className="wcs-add-to-cart-wrapper">
-            { (currentProduct) && (
+            { (currentCart) && (
                 <span className="wcs-add-to-cart-counter">
-                    { currentProduct?.quantity || 1 }
+                    { currentCart?.quantity }
                 </span>
             )}
-            <button onClick={() => addToCart(product_id)}>
-                Ajouter au panier
-            </button>
+            { (currentCart?.quantity) 
+                ? (
+                    <span> Déjà dans le panier </span>
+                )
+                : (
+                    <button onClick={addProductToCart}>
+                        Ajouter au panier
+                    </button>
+                ) 
+            }
         </div>
     )
 }

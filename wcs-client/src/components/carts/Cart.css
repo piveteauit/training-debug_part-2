@@ -5,6 +5,7 @@
     flex-direction: column;
     gap: 2em;
     border: 3px solid #EFEFEF;
+    min-width: 220px;
 }
 
 .wcs-cart-title {

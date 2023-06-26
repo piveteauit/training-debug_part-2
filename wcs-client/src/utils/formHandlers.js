@@ -32,8 +32,6 @@ export function _onSubmit(payload, cb = (result) => {}) {
         evt.preventDefault();
         const {method, action} = evt.target;
 
-        console.log(method, action)
-
         return httpService[`_${(method || "get").toLowerCase()}`](action, payload).then(cb)
     }
 }

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { httpService } from "../services";
 
 /**
  * 
@@ -27,7 +28,6 @@ export const useCart = () => useContext(CartContext);
 export function  CartContextProvider({ children }) {
   const [cart, setCart] = useState([]);
 
-  
   /**
    * 
    * @date 26/06/2023 - 20:28:56
@@ -50,16 +50,15 @@ export function  CartContextProvider({ children }) {
    */
   const addToCart = async(product_id) => {
     let newCart = [...cart];
-    
-    // httpService.update(`/carts/${c.id}`);
 
     if (!cart.some(c => c.product_id === product_id)) newCart.push({product_id, quantity: 1});
     else 
       newCart = cart.map((c) => ({
+        ...c,
         product_id: c.product_id,
         quantity: Number(c.quantity || 0) + Number(c.product_id === product_id)
       }));
- 
+
     updateCart(newCart)
   };
   
@@ -77,6 +76,7 @@ export function  CartContextProvider({ children }) {
     if (!cart.some(c => c.product_id === product_id)) newCart.push({product_id, quantity: 1});
     else 
       newCart = cart.map((c) => ({
+        ...c,
         product_id: c.product_id,
         quantity: Number(c.quantity || 0) - Number(c.product_id === product_id)
       }));
@@ -109,9 +109,17 @@ export function  CartContextProvider({ children }) {
       return acc;
     }, []);
 
+  const saveCart = ({product_id, quantity}, user_id, cart_id) => {
+    if (!user_id) return;
+
+    if (!cart_id) return httpService.create(`users/${user_id}/carts`, {product_id, quantity, user_id});
+    
+    return httpService.update(`users/${user_id}/carts/${cart_id}`, {quantity});
+  }
+
   return (
     <CartContext.Provider
-      value={{cart, updateCart, addToCart, removeToCart, getInCartProducts, setCart}}
+      value={{cart, updateCart, addToCart, removeToCart, getInCartProducts, setCart, saveCart}}
     >
       {children}
     </CartContext.Provider>
