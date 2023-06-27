@@ -1,9 +1,9 @@
 Bien sûr ! Voici la version corrigée du README.md avec les commandes npm formatées en mode code :
 
 
-# Projet XYZ - Guide d'installation et de dépannage
+# Projet training-debug_part-2 - Guide d'installation et de dépannage
 
-Ce guide fournit des instructions pour installer et exécuter le projet XYZ, ainsi que des détails sur les bogues connus et les évolutions prévues. Veuillez suivre les étapes ci-dessous pour configurer le projet correctement.
+Ce guide fournit des instructions pour installer et exécuter le projet training-debug_part-2, ainsi que des détails sur les bogues connus et les évolutions prévues. Veuillez suivre les étapes ci-dessous pour configurer le projet correctement.
 
 ## Installation
 
