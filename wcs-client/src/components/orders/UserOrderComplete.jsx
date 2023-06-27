@@ -1,3 +1,12 @@
+
+/**
+ * 
+ * @date 27/06/2023 - 13:18:08
+ *
+ * @export
+ * @param {*} order
+ * @returns {*}
+ */
 export function UserOrderComplete(order) {
     return (
         <table key={`UserOrderComplete-${order.ref}`}>
@@ -28,7 +37,7 @@ export function UserOrderComplete(order) {
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>{order.price} €</td>
+                    <td>{order.price.toFixed(2)} €</td>
                 </tr>
             </tfoot>
         </table>

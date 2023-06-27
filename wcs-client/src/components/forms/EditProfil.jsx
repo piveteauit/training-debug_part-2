@@ -2,6 +2,7 @@ import { useState } from "react";
 import { WCSInput } from "../../shared";
 import { _onChange, _onSubmit } from "../../utils";
 import { useUser } from "../../contexts";
+import { httpService } from "../../services";
 
 /**
  * 
@@ -16,15 +17,16 @@ export function EditProfil() {
     
     const onChange = _onChange(values, setValues);
     const onSubmitCB = (user) => {
+        httpService.update(`users/${id}`, values);
         setUser(user);
     }
 
     return (
         <form onSubmit={_onSubmit(values, onSubmitCB)} action={`/api/users/${id}`} method="put">
 
-            <WCSInput readOnly value={values.username} label="Username" id={"login-username"} type="text" name="username" onChange={onChange} />
-            <WCSInput readOnly value={values.email} label="Email" id={"login-email"} type="email" name="email" onChange={onChange} />
-            <WCSInput readOnly value={values.password} label="Password" id={"login-password"} type="password" name="password" onChange={onChange} />
+            <WCSInput value={values.username} label="Username" id={"login-username"} type="text" name="username" onChange={onChange} />
+            <WCSInput value={values.email} label="Email" id={"login-email"} type="email" name="email" onChange={onChange} />
+            <WCSInput value={values.password} label="Password" id={"login-password"} type="password" name="password" onChange={onChange} />
 
             <button type="submit">Valider</button>
         </form>

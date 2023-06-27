@@ -29,12 +29,12 @@ INSERT INTO carts (user_id, product_id, quantity) VALUES
 (4, 4, 1);
 
 INSERT INTO orders (cart_id, status_id, order_num) VALUES
-(1, 2, "FA-123-1"),
-(2, 2, "FA-123-1"),
-(3, 1, "FA-234-1"),
+(1, 2, "FA-123"),
+(2, 2, "FA-123"),
+(3, 1, "FA-234"),
 
-(5, 1, "FA-56-2"),
-(6, 1, "FA-56-2"),
+(5, 1, "FA-56"),
+(6, 1, "FA-56"),
 
-(9, 2, "FA-910-4"),
-(10, 1, "FA-910-4");
+(9, 2, "FA-910"),
+(10, 1, "FA-910");

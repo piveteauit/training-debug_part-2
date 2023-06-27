@@ -1,3 +1,12 @@
+
+/**
+ * 
+ * @date 27/06/2023 - 13:18:16
+ *
+ * @export
+ * @param {*} order
+ * @returns {*}
+ */
 export function UserOrderPaid(order) {
     return (
         <table key={`UserOrderPaid-${order.ref}`}>
@@ -28,7 +37,7 @@ export function UserOrderPaid(order) {
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>{order.price} €</td>
+                    <td>{order.price.toFixed(2)} €</td>
                 </tr>
             </tfoot>
         </table>

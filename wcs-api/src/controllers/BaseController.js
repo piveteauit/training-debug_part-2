@@ -72,7 +72,12 @@ class BaseController {
             .catch(this.handleError.bind(this));
     }
 
-    
+    create() {
+        this.model.create(this.req.body)
+            .then(([results]) => this.sendJson(results))
+            .catch(this.handleError.bind(this));
+    }
+
     /**
      * 
      * @date 09/06/2023 - 11:01:01

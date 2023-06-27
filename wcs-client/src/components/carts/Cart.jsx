@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { httpService } from "../../services";
 import { useCart, useProduct, useUser } from "../../contexts";
 import { ProductLightItem } from "../products";
+import { useNavigate } from "react-router-dom";
 
 /**
  * 
@@ -15,6 +16,7 @@ export function Cart() {
     const {user} = useUser();
     const [products] = useProduct();
     const [inCartProducts, setInCartProducts] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (products?.length) setInCartProducts(getInCartProducts(products));
@@ -25,6 +27,17 @@ export function Cart() {
             .then(setCart)
             .catch(console.error)
     }, [products])
+
+    const placeOrder = () => {
+        if (!window.confirm("C'est votre dernier mot ?")) return;
+
+        httpService.create("orders", cart.map(({cart_id}) => cart_id))
+            .then(() => {
+                setInCartProducts([]);
+                navigate("/history")
+            })
+            .catch((e) => alert(`Oups, something went wrong, retry later \n\n ${e.message}`));
+    }
 
     const totalPrice = inCartProducts.reduce((totalPrice, {price, quantity}) => (totalPrice + (Number(price) * Number(quantity))), 0).toFixed(2);
 
@@ -48,7 +61,7 @@ export function Cart() {
                     </span>
                </div>
                 <div className="wcs-cart-checkout">
-                    <button onClick={console.log}>
+                    <button onClick={placeOrder}>
                         Checkout
                     </button>
                 </div>
