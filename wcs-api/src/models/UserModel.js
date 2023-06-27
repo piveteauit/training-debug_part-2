@@ -30,7 +30,7 @@ class UserModel extends BaseModel {
      */
     constructor() {
         super('users u');
-
+        
         this.fieldsMapping = {
             "id": [`u.id`],
             "email": [`u.email`],
@@ -42,10 +42,75 @@ class UserModel extends BaseModel {
         }
     }
 
+    /**
+     * 
+     * @date 26/06/2023 - 20:32:48
+     *
+     * @param {*} user_id
+     * @returns {*}
+     */
     getUserCart(user_id) {
         return this.db.query(
-        `SELECT product_id, quantity FROM carts WHERE user_id = ?`,
+        `SELECT c.id as cart_id, product_id, quantity FROM carts AS c WHERE user_id = ? AND c.id NOT IN (SELECT o.cart_id FROM orders AS o)`,
         [user_id]);
+    }
+
+    /**
+     * 
+     * @date 27/06/2023 - 10:46:03
+     *
+     * @param {*} user_id
+     * @returns {*}
+     */
+    getUserOrders(user_id) {
+        return this.db.query(
+            `SELECT 
+                c.id as cart_id, 
+                c.product_id as product_id, 
+                c.quantity as quantity,
+                o.order_num as ref,
+                p.title,
+                CAST(p.price AS DECIMAL(10, 2)) as unit_price,
+                CAST(p.price AS DECIMAL(10, 2)) * c.quantity as price,
+                os.label AS status
+            FROM carts as c
+            INNER JOIN orders as o 
+                ON c.id = o.cart_id
+            INNER JOIN status as os 
+                ON os.id = o.status_id
+            INNER JOIN products as p 
+                ON p.id = c.product_id
+            WHERE c.user_id = ?
+            ORDER BY status DESC
+            `,
+            [user_id]);
+    }
+
+    /**
+     * 
+     * @date 26/06/2023 - 20:32:56
+     *
+     * @param {{ email: any; password: any; }} {email, password}
+     * @returns {*}
+     */
+    authUser({email, password}) {
+        return this.db.query(
+            `SELECT ${this._getFields()} FROM ${this.table} ${this._getJoins()} WHERE email = ? AND password = MD5(?)`,
+            [email, password]);
+    }
+
+    /**
+     * 
+     * @date 26/06/2023 - 21:28:48
+     *
+     * @param {*} payload
+     * @returns {*}
+     */
+    create(payload) {
+        return this.db.query(
+            `INSERT INTO ${this.rawTable} (email, username, password, role_id) VALUES (?, ?, MD5(?), 2)`,
+            Object.values(payload)
+        )
     }
 }
 

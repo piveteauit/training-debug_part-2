@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
-import { AddProduct, AddToCart } from "../../shared";
+import { AddToCart } from "../../shared";
 
+/**
+ * 
+ * @date 26/06/2023 - 20:26:36
+ *
+ * @export
+ * @param {{ id: any; title: any; price: any; image: any; }} {id, title, price, image}
+ * @returns {*}
+ */
 export function ProductItem({id, title, price, image}) {
     const productLink = `/products/${id}`;
 

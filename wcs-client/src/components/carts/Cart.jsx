@@ -2,22 +2,42 @@ import { useEffect, useState } from "react";
 import { httpService } from "../../services";
 import { useCart, useProduct, useUser } from "../../contexts";
 import { ProductLightItem } from "../products";
+import { useNavigate } from "react-router-dom";
 
+/**
+ * 
+ * @date 26/06/2023 - 20:25:54
+ *
+ * @export
+ * @returns {*}
+ */
 export function Cart() {
     const {setCart, getInCartProducts, cart} = useCart();
     const {user} = useUser();
     const [products] = useProduct();
     const [inCartProducts, setInCartProducts] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        httpService.getAll(`users/${user?.id || 1}/carts`)
+        if (products?.length) setInCartProducts(getInCartProducts(products));
+    }, [cart]);
+
+    useEffect(() => {
+        httpService.getAll(`users/${user?.id}/carts`)
             .then(setCart)
             .catch(console.error)
-    }, [])
+    }, [products])
 
-    useEffect(() => {
-        setInCartProducts(getInCartProducts(products));
-    }, [cart])
+    const placeOrder = () => {
+        if (!window.confirm("C'est votre dernier mot ?")) return;
+
+        httpService.create("orders", cart.map(({cart_id}) => cart_id))
+            .then(() => {
+                setInCartProducts([]);
+                navigate("/history")
+            })
+            .catch((e) => alert(`Oups, something went wrong, retry later \n\n ${e.message}`));
+    }
 
     const totalPrice = inCartProducts.reduce((totalPrice, {price, quantity}) => (totalPrice + (Number(price) * Number(quantity))), 0).toFixed(2);
 
@@ -41,7 +61,7 @@ export function Cart() {
                     </span>
                </div>
                 <div className="wcs-cart-checkout">
-                    <button onClick={console.log}>
+                    <button onClick={placeOrder}>
                         Checkout
                     </button>
                 </div>

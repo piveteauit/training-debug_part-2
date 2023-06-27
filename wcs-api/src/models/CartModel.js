@@ -31,6 +31,27 @@ class CartModel extends BaseModel {
             ],
         }
     }
+
+    /**
+     * 
+     * @date 26/06/2023 - 23:11:40
+     *
+     * @param {*} payload
+     * @returns {*}
+     */
+    create(payload) {
+        return this.db.query(
+            `INSERT INTO ${this.rawTable} (product_id, quantity, user_id) VALUES (?, ?, ?)`,
+            Object.values(payload)
+        )
+    }
+
+    update(payload, id) {
+        return this.db.query(
+            `UPDATE ${this.rawTable} SET quantity = ? WHERE id = ?`,
+            [payload?.quantity, id]
+        )
+    }
 }
 
 module.exports = CartModel;

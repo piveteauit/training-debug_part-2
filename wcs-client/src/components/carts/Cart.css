@@ -1,11 +1,11 @@
 .wcs-cart {
-    min-width: 180px;
     margin: 40px 40px 40px 20px;
     padding: 5px;
     display: flex;
     flex-direction: column;
     gap: 2em;
     border: 3px solid #EFEFEF;
+    min-width: 220px;
 }
 
 .wcs-cart-title {

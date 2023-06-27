@@ -17,6 +17,14 @@
     justify-content: center;
 }
 
+.wcs-orders-wrapper {
+    display: flex;
+    padding: 40px;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 30px;
+}
+
 @media screen and (max-width: 780px) {
     .wcs-main {
         flex-direction: column-reverse;

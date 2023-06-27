@@ -1,9 +1,9 @@
-require("dotenv").config();
 
 const fs = require("fs");
 const mysql = require("mysql2/promise");
 const path = require("path");
 
+require("dotenv").config();
 
 /**
  * 
@@ -12,7 +12,6 @@ const path = require("path");
  * @type {*}
  */
 const migrationsDir = path.resolve(`${__dirname}/../wcs-db/`);
-
 
 /**
  * 
@@ -56,7 +55,6 @@ const migrate = async () => {
     .catch((error) => {
         console.error(error)
     });
-
 };
 
 try {
