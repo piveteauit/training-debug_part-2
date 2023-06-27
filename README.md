@@ -1,8 +1,6 @@
-# Training debug part 2
+Bien sûr ! Voici la version corrigée du README.md avec les commandes npm formatées en mode code :
 
-Bien sûr ! Voici le contenu que vous pouvez ajouter à votre fichier README.md :
 
-```
 # Projet XYZ - Guide d'installation et de dépannage
 
 Ce guide fournit des instructions pour installer et exécuter le projet XYZ, ainsi que des détails sur les bogues connus et les évolutions prévues. Veuillez suivre les étapes ci-dessous pour configurer le projet correctement.
@@ -49,6 +47,5 @@ Ce guide fournit des instructions pour installer et exécuter le projet XYZ, ain
 
 N'hésitez pas à consulter la liste des tâches ci-dessus pour plus de détails sur les problèmes connus et les évolutions prévues. Si vous rencontrez des problèmes supplémentaires, veuillez les signaler à l'équipe de développement.
 
-```
 
-N'hésitez pas à personnaliser ce contenu en fonction de votre projet spécifique. Assurez-vous d'inclure des informations claires et précises pour faciliter la compréhension des étudiants.
+J'espère que cette version convient à vos attentes !
