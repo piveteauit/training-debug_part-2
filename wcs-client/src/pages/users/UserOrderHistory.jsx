@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useUser } from "../../contexts"
 import { httpService } from "../../services";
+import { UserOrderComplete, UserOrderPaid } from "../../components";
 
 export function UserOrderHistory() {
     const {user} = useUser();
@@ -12,19 +13,26 @@ export function UserOrderHistory() {
             .catch(console.error);
     }, [])
     
-    console.log(history)
+    const currentOrders = history.filter((a) => a.status === "PAID" );
+    const archivedOrders = history.filter((a) => a.status === "COMPLETE" );
     
+    const getTotalOrdersPrice = (orders) => orders.reduce((acc, ord) => acc + ord.price, 0);
     return (
-        <div>
-            { history.map((order, i) => {
-                return (
-                    <span key={"UserOrderHistory-" + i}>
-                        {order?.id}
-                    </span>
-                )
-            })
-
-            }
+        <div className="wcs-orders-wrapper">
+            <h2 style={{textAlign: "center"}}>
+                Total: {getTotalOrdersPrice(history)} €
+            </h2>
+            <div>
+                <h3> Commandes en cours: </h3>
+                { currentOrders.map(UserOrderPaid) }
+                <hr />
+            </div>
+            <div>
+                <h3> Commandes passées: </h3>
+                { archivedOrders.map(UserOrderComplete) }
+                <hr />
+            </div>
+          
         </div>
     )
 }

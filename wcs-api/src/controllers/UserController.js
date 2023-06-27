@@ -43,10 +43,25 @@ class UserController extends BaseController {
      *
      * @returns {*}
      */
-    getUserOrders() {
-        return this.model.getUserOrders(this.req.params.user_id)
-            .then(([results]) => this.sendJson(results))
-            .catch(this.handleError.bind(this))
+    async getUserOrders() {
+        try {
+            const [userOrders] = await this.model.getUserOrders(this.req.params.user_id)
+            this.sendJson(
+                userOrders.reduce((acc, {ref, status, ...product }) => {
+                    const currentOrder = acc.find((cur) => cur.ref === ref) || {ref, price: 0, status, products: []};
+                    const currentOrderIndex = acc.indexOf(currentOrder);
+                    currentOrder.products.push(product)
+                    currentOrder.price += Number(product.price)
+
+                    if (~currentOrderIndex) acc[currentOrderIndex] = currentOrder;
+                    else acc.push(currentOrder);
+
+                    return acc;
+                }, [])
+            );
+        } catch (e) {
+            this.handleError(e);
+        }
     }
     
     /**

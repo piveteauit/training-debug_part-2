@@ -18,6 +18,7 @@ INSERT INTO carts (user_id, product_id, quantity) VALUES
 (1, 1, 2),
 (1, 11, 1),
 (1, 7, 2),
+(1, 9, 2),
 (2, 6, 2),
 (2, 5, 1),
 (2, 8, 4),
@@ -27,10 +28,13 @@ INSERT INTO carts (user_id, product_id, quantity) VALUES
 (4, 1, 1),
 (4, 4, 1);
 
-INSERT INTO orders (cart_id, status_id) VALUES
-(1, 2),
-(2, 1),
-(4, 1),
-(5, 1),
-(8, 2),
-(9, 1);
+INSERT INTO orders (cart_id, status_id, order_num) VALUES
+(1, 2, "FA-123-1"),
+(2, 2, "FA-123-1"),
+(3, 1, "FA-234-1"),
+
+(5, 1, "FA-56-2"),
+(6, 1, "FA-56-2"),
+
+(9, 2, "FA-910-4"),
+(10, 1, "FA-910-4");

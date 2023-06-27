@@ -65,6 +65,7 @@ CREATE TABLE orders (
     id int primary key NOT NULL AUTO_INCREMENT,
     cart_id INT NOT NULL,
     status_id INT NOT NULL,
+    order_num VARCHAR(25) NOT NULL,
     FOREIGN KEY (cart_id)
         REFERENCES carts(id)
         ON DELETE CASCADE,

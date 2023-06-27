@@ -67,14 +67,21 @@ class UserModel extends BaseModel {
             `SELECT 
                 c.id as cart_id, 
                 c.product_id as product_id, 
-                c.quantity as quantity, 
-                os.label AS status 
-            FROM carts as c 
+                c.quantity as quantity,
+                o.order_num as ref,
+                p.title,
+                CAST(p.price AS DECIMAL(10, 2)) as unit_price,
+                CAST(p.price AS DECIMAL(10, 2)) * c.quantity as price,
+                os.label AS status
+            FROM carts as c
             INNER JOIN orders as o 
                 ON c.id = o.cart_id
             INNER JOIN status as os 
                 ON os.id = o.status_id
+            INNER JOIN products as p 
+                ON p.id = c.product_id
             WHERE c.user_id = ?
+            ORDER BY status DESC
             `,
             [user_id]);
     }
