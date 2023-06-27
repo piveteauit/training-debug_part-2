@@ -51,8 +51,32 @@ class UserModel extends BaseModel {
      */
     getUserCart(user_id) {
         return this.db.query(
-        `SELECT id as cart_id, product_id, quantity FROM carts WHERE user_id = ?`,
+        `SELECT c.id as cart_id, product_id, quantity FROM carts AS c WHERE user_id = ? AND c.id NOT IN (SELECT o.cart_id FROM orders AS o)`,
         [user_id]);
+    }
+
+    /**
+     * 
+     * @date 27/06/2023 - 10:46:03
+     *
+     * @param {*} user_id
+     * @returns {*}
+     */
+    getUserOrders(user_id) {
+        return this.db.query(
+            `SELECT 
+                c.id as cart_id, 
+                c.product_id as product_id, 
+                c.quantity as quantity, 
+                os.label AS status 
+            FROM carts as c 
+            INNER JOIN orders as o 
+                ON c.id = o.cart_id
+            INNER JOIN status as os 
+                ON os.id = o.status_id
+            WHERE c.user_id = ?
+            `,
+            [user_id]);
     }
 
     /**

@@ -3,8 +3,8 @@ import { Forms } from "../../components";
 import { useUser } from "../../contexts";
 import { useNavigate } from "react-router-dom";
 
-export function Home() {
-    const [currentForm, setCurrentForm] = useState("Login");
+export function Home({initialForm}) {
+    const [currentForm, setCurrentForm] = useState(initialForm);
     const {user} = useUser();
     const navigate = useNavigate();
 
@@ -24,7 +24,6 @@ export function Home() {
                 ? <Forms.Login />
                 : <Forms.Register />
             }
-
 
             <a className="form-alt" href="#" onClick={() => setCurrentForm(currentForm === "Login" ? "Register" : "Login")}>
                 ou {currentForm === "Login" ? "Register" : "Login"} 

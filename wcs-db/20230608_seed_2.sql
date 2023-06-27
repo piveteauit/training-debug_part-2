@@ -1,4 +1,5 @@
 INSERT INTO roles (label) VALUES ('USER'), ('ADMIN');
+INSERT INTO status (label) VALUES ('PAID'), ('COMPLETE');
 
 INSERT INTO users (username, email, password, role_id) VALUES 
 ('admin','admin@gmail.com', MD5('admin@gmail.com'), 2),
@@ -17,7 +18,19 @@ INSERT INTO carts (user_id, product_id, quantity) VALUES
 (1, 1, 2),
 (1, 11, 1),
 (1, 7, 2),
+(2, 6, 2),
+(2, 5, 1),
+(2, 8, 4),
+(2, 2, 2),
 (4, 3, 1),
 (4, 7, 2),
 (4, 1, 1),
 (4, 4, 1);
+
+INSERT INTO orders (cart_id, status_id) VALUES
+(1, 2),
+(2, 1),
+(4, 1),
+(5, 1),
+(8, 2),
+(9, 1);

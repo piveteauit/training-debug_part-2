@@ -29,13 +29,16 @@ export function Header() {
             { (user) && (
                 <div className="wcs-header-right">
                     <NavLink className={"wcs-header-navlink"} to={"/profil"}> Profil </NavLink>
-                    <NavLink className={"wcs-header-navlink"} onClick={onLogout}> Logout </NavLink>
+                    <NavLink className={"wcs-header-navlink"} to={"/history"}> Historique </NavLink>
+                    <NavLink className={"wcs-header-navlink"} to={"/"} onClick={onLogout}> Logout </NavLink>
                 </div>
             )}
 
             { (!user) && (
                 <div className="wcs-header-right">
-                    <NavLink className={"wcs-header-navlink"} to={"/login"}> Login / Register </NavLink>
+                    <NavLink className={"wcs-header-navlink"} to={"/login"}> Login </NavLink>
+                    /
+                    <NavLink className={"wcs-header-navlink"} to={"/register"}> Register </NavLink>
                 </div>
             )}
 

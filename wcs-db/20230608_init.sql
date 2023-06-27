@@ -8,6 +8,15 @@ CREATE TABLE roles (
 
 
 SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS status CASCADE;
+SET FOREIGN_KEY_CHECKS = 1;
+CREATE TABLE status (
+    id int primary key NOT NULL AUTO_INCREMENT,
+    label varchar(10) NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+
+SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS users CASCADE;
 SET FOREIGN_KEY_CHECKS = 1;
 CREATE TABLE users (
@@ -46,5 +55,20 @@ CREATE TABLE carts (
         ON DELETE CASCADE,
     FOREIGN KEY (product_id)
         REFERENCES products(id)
+        ON DELETE CASCADE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS orders CASCADE;
+SET FOREIGN_KEY_CHECKS = 1;
+CREATE TABLE orders (
+    id int primary key NOT NULL AUTO_INCREMENT,
+    cart_id INT NOT NULL,
+    status_id INT NOT NULL,
+    FOREIGN KEY (cart_id)
+        REFERENCES carts(id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (status_id)
+        REFERENCES status(id)
         ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;

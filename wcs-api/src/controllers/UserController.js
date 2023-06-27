@@ -36,8 +36,18 @@ class UserController extends BaseController {
             .then(([results]) => this.sendJson(results))
             .catch(this.handleError.bind(this))
     }
-
     
+    /**
+     * 
+     * @date 27/06/2023 - 10:45:30
+     *
+     * @returns {*}
+     */
+    getUserOrders() {
+        return this.model.getUserOrders(this.req.params.user_id)
+            .then(([results]) => this.sendJson(results))
+            .catch(this.handleError.bind(this))
+    }
     
     /**
      * 
