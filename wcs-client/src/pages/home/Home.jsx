@@ -1,22 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Forms } from "../../components";
+import { useUser } from "../../contexts";
+import { useNavigate } from "react-router-dom";
 
-export function Home() {
-    const [currentForm, setCurrentForm] = useState("Login");
-    const switchForm = () => setCurrentForm(currentForm === "Login" ? "Register" : "Login");
+export function Home({initialForm}) {
+    const [currentForm, setCurrentForm] = useState(initialForm);
+    const {user} = useUser();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user) navigate('/shop')
+    }, [user])
+
     
     return (
-        <main>
-            <h2> {currentForm} </h2>
+        <div className="home">
 
-            {Forms[currentForm]()}
+            <h2>
+                {currentForm}
+            </h2>
+            
+            { (currentForm === "Login")
+                ? <Forms.Login />
+                : <Forms.Register />
+            }
 
-            <button onClick={switchForm}>
-                { currentForm === "Login"
-                    ? "Pas encore de compte, inscrivez vous"
-                    : "Déjà inscrit ? Connectez vous"
-                }
-            </button>
-        </main>
+            <a className="form-alt" href="#" onClick={() => setCurrentForm(currentForm === "Login" ? "Register" : "Login")}>
+                ou {currentForm === "Login" ? "Register" : "Login"} 
+            </a> 
+        </div>
     );
 }

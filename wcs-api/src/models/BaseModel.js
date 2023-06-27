@@ -1,6 +1,5 @@
 const {db} = require("../config");
 
-
 /**
  * 
  * @date 09/06/2023 - 10:56:29
@@ -9,7 +8,17 @@ const {db} = require("../config");
  * @typedef {BaseModel}
  */
 class BaseModel {
-
+    
+    /**
+     * 
+     * @date 26/06/2023 - 21:36:30
+     *
+     * @readonly
+     * @type {*}
+     */
+    get rawTable() {
+        return this.table.split(' ')?.[0];
+    }
     
     /**
      * 
@@ -35,7 +44,6 @@ class BaseModel {
      */
     db;
 
-    
     /**
      * 
      * @date 09/06/2023 - 10:56:50
@@ -51,7 +59,6 @@ class BaseModel {
      * @type {{}}
      */
     joins = [];
-
     
     /**
      * Creates an instance of BaseModel.
@@ -65,8 +72,6 @@ class BaseModel {
         this.alias = table.split(' ')?.[1] || table;
         this.db = db;
     }
-
-
     
     /**
      * 
@@ -79,7 +84,6 @@ class BaseModel {
             .query(`SELECT ${this._getFields()} FROM ${this.table} ${this._getJoins()}`)
     }
 
-    
     /**
      * 
      * @date 09/06/2023 - 10:57:30
@@ -91,8 +95,15 @@ class BaseModel {
         return this.db
             .query(`SELECT ${this._getFields()} FROM ${this.table} ${this._getJoins()} WHERE ${this.alias}.id = ?`, [id])
     }
-
     
+    update(payload, id) {
+        const keys = Object.keys(payload).map((k) => `${k} = ?`);
+        const values = Object.keys(payload);
+
+        return this.db
+            .query(`UPDATE ${this.rawTable} SET ${keys.join(",")} WHERE id = ?`, [...values, id]);
+    }
+
     /**
      * 
      * @date 09/06/2023 - 10:58:03
@@ -106,7 +117,6 @@ class BaseModel {
             || "*"
     }
 
-    
     /**
      * 
      * @date 09/06/2023 - 10:58:27
@@ -119,7 +129,6 @@ class BaseModel {
             ?.map((field) => this.fieldsMapping[field]?.[1].query)
             || "";
     }
-
 }
 
 module.exports = BaseModel;

@@ -47,7 +47,6 @@ class FieldMapping {
      * @type {*}
      */
     get query() {
-        console.log(this._query);
         return this._query;
     }
     

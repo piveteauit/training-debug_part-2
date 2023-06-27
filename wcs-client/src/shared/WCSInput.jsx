@@ -1,9 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+/**
+ * 
+ * @date 26/06/2023 - 20:28:30
+ *
+ * @export
+ * @param {*} props
+ * @returns {*}
+ */
 export function WCSInput (props) {
-    const [active, setActive] = useState(!!props.value);
+    const [active, setActive] = useState(false);
 
-    console.log(props)
+    useEffect(() => {
+        setActive(!!props.value);
+    }, [props.value])
 
     return (
         <div className="wcs-input-wrapper">

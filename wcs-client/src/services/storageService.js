@@ -1,9 +1,32 @@
+
+/**
+ * 
+ * @date 26/06/2023 - 20:08:28
+ *
+ * @type {{ setItem(key: string, data: string): any; getItem(key: string): any; }}
+ */
 const storageService = {
-  setItem: function (key, data) {
+  
+  /**
+   * 
+   * @date 26/06/2023 - 20:08:04
+   *
+   * @param {string} key
+   * @param {string} data
+   * @returns {*}
+   */
+  setItem(key, data) {
     return localStorage.setItem(key, JSON.stringify(data));
   },
-
-  getItem: function (key) {
+  
+  /**
+   * 
+   * @date 26/06/2023 - 20:08:15
+   *
+   * @param {string} key
+   * @returns {*}
+   */
+  getItem(key) {
     const data = localStorage.getItem(key);
     try {
       return JSON.parse(data);
