@@ -6,7 +6,7 @@ const userRouter = Router();
 
 userRouter.get('', (req, res) => new UserController(req, res).getAll());
 userRouter.get('/:id', (req, res) => new UserController(req, res).getById());
-userRouter.put('/:id', (req, res) => new UserController(req, res).update());
+userRouter.put('/:user_id', (req, res) => new UserController(req, res).update());
 
 userRouter.post('/auth', (req, res) => new UserController(req, res).authUser());
 userRouter.post('/register', (req, res) => new UserController(req, res).register());

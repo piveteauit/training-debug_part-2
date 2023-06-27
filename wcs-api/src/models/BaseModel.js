@@ -95,6 +95,14 @@ class BaseModel {
         return this.db
             .query(`SELECT ${this._getFields()} FROM ${this.table} ${this._getJoins()} WHERE ${this.alias}.id = ?`, [id])
     }
+    
+    update(payload, id) {
+        const keys = Object.keys(payload).map((k) => `${k} = ?`);
+        const values = Object.keys(payload);
+
+        return this.db
+            .query(`UPDATE ${this.rawTable} SET ${keys.join(",")} WHERE id = ?`, [...values, id]);
+    }
 
     /**
      * 

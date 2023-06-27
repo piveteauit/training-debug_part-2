@@ -17,16 +17,20 @@ export function EditProfil() {
     
     const onChange = _onChange(values, setValues);
     const onSubmitCB = (user) => {
-        httpService.update(`users/${id}`, values);
-        setUser(user);
+        httpService.update(`users/${id}`, values)
+            .then((result) => {
+                if (!result || result?.error) return alert(`Something bad happend ! \n\n ${result.error}`)
+
+                setUser(user)
+            });
     }
 
     return (
         <form onSubmit={_onSubmit(values, onSubmitCB)} action={`/api/users/${id}`} method="put">
 
-            <WCSInput value={values.username} label="Username" id={"login-username"} type="text" name="username" onChange={onChange} />
-            <WCSInput value={values.email} label="Email" id={"login-email"} type="email" name="email" onChange={onChange} />
-            <WCSInput value={values.password} label="Password" id={"login-password"} type="password" name="password" onChange={onChange} />
+            <WCSInput value={values.username} label="Username" id={"login-username"} type="text" name="login-username" onChange={onChange} />
+            <WCSInput value={values.email} label="Email" id={"login-email"} type="email" name="login-email" onChange={onChange} />
+            <WCSInput value={values.password || ""} label="Password" id={"login-password"} type="password" name="login-password" onChange={onChange} />
 
             <button type="submit">Valider</button>
         </form>

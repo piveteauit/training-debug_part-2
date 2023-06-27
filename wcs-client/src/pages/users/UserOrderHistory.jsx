@@ -23,11 +23,12 @@ export function UserOrderHistory() {
     const currentOrders = history.filter((a) => a.status === "PAID" );
     const archivedOrders = history.filter((a) => a.status === "COMPLETE" );
     
-    const getTotalOrdersPrice = (orders) => orders.reduce((acc, ord) => acc + ord.price, 0).toFixed(2);
+    const getTotalOrdersPrice = (allHistory) => allHistory?.reduce((acc, ord) => acc + ord.price, 0).toFixed(2);
+
     return (
         <div className="wcs-orders-wrapper">
             <h2 style={{textAlign: "center"}}>
-                Total: {getTotalOrdersPrice(history)} €
+                Total: {getTotalOrdersPrice()} €
             </h2>
             <div>
                 <h3> Commandes en cours: </h3>

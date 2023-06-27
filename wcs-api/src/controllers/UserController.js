@@ -106,6 +106,12 @@ class UserController extends BaseController {
             .catch(this.handleError.bind(this));
     }
 
+    /**
+     * 
+     * @date 27/06/2023 - 14:54:21
+     *
+     * @returns {*}
+     */
     addCart() {
         return new CartModel()
             .create({...this.req.body, user_id: this.req.params.user_id})
@@ -118,6 +124,12 @@ class UserController extends BaseController {
             .catch(this.handleError.bind(this));
     }
 
+    /**
+     * 
+     * @date 27/06/2023 - 14:54:24
+     *
+     * @returns {*}
+     */
     updateCart() {
         return new CartModel()
             .update(this.req.body, this.req.params.cart_id)
